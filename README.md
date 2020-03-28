@@ -20,7 +20,7 @@ The app pulls data about launches from the public SpaceX api.
 - Clicking on another launch will cause the currently expanded launch to close, and expand the one that was clicked instead
 - If a launch is already expanded, clicking on it again will close it
 
-Feel free to add files, breakup components or modularize and generally clean up code (Please be weary of time! First get it working).
+Feel free to add files, breakup components or modularize and generally clean up code (Please be wary of time! First get it working).
 Place more emphasis on usability than graphic design, code with the assumption that colors, borders and margins might change
 according to forthcoming design requirements and your job is to get the feature working in a well structured way.
 

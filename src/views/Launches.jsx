@@ -6,11 +6,11 @@ import Launch from '../components/Launch';
 
 class LaunchesView extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       openedLaunch: 0
-    }
+    };
   }
 
   componentDidMount() {
@@ -19,23 +19,23 @@ class LaunchesView extends Component {
   }
 
   onLaunchClicked = (launch) => {
-    const { openedLaunch } = this.state
-    if (openedLaunch.flight_number === launch.flight_number) {
-      this.setState({ openedLaunch: 0 })
+    const { openedLaunch } = this.state;
+
+    if (openedLaunch === launch.flight_number) {
+      this.setState({ openedLaunch: 0 });
     } else {
       const { dispatch } = this.props;
-      const rocketId = launch.rocket.rocket_id
+      const rocketId = launch.rocket.rocket_id;
 
-      fetchRocket({ dispatch, rocketId }).then(data => {
-        this.setState({ openedLaunch: launch.flight_number })
-      })
-      
+      fetchRocket({ dispatch, rocketId }).then(() => {
+        this.setState({ openedLaunch: launch.flight_number });
+      }); 
     }
   }
 
   renderLaunches() {
     const { launchCollection, rocketData } = this.props;
-    const { openedLaunch } = this.state
+    const { openedLaunch } = this.state;
 
     if (!launchCollection || launchCollection.fetching) {
       return <div> LOADING </div>;
@@ -49,9 +49,9 @@ class LaunchesView extends Component {
 
     for (let i = 0; i < launchCollection.launches.length; i++) {
       const launch = launchCollection.launches[i];
-      let rocket
+      let rocket;
       if (rocketData.rocket && rocketData.rocket.rocket_id === launch.rocket.rocket_id) {
-        rocket = { ...rocketData.rocket }
+        rocket = { ...rocketData.rocket };
       }
 
       launches.push(
@@ -62,7 +62,7 @@ class LaunchesView extends Component {
           isOpen: openedLaunch === launch.flight_number,
           rocket
         }} />
-      )
+      );
     }
 
     return <ul>{launches}</ul>;
@@ -70,7 +70,7 @@ class LaunchesView extends Component {
 
   render() {
     return (
-      <div>
+      <div className="launches-list">
         <h2> SpaceX launches </h2>
         {this.renderLaunches()}
       </div>
