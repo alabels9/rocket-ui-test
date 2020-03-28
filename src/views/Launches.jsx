@@ -24,12 +24,16 @@ class LaunchesView extends Component {
     if (openedLaunch === launch.flight_number) {
       this.setState({ openedLaunch: 0 });
     } else {
-      const { dispatch } = this.props;
+      const { dispatch, rocketData } = this.props;
       const rocketId = launch.rocket.rocket_id;
 
-      fetchRocket({ dispatch, rocketId }).then(() => {
+      if (rocketData.rocket && rocketData.rocket.rocket_id === rocketId) {
         this.setState({ openedLaunch: launch.flight_number });
-      }); 
+      } else {
+        fetchRocket({ dispatch, rocketId }).then(() => {
+          this.setState({ openedLaunch: launch.flight_number });
+        });
+      } 
     }
   }
 
